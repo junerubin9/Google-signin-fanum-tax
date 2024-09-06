@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stolen Stuff</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F0F4F8;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            width: 500px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 20px;
+            color: #323232;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 0;
+            color: #5f6368;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>YOUR INFORMATION HAS BEEN FANUM TAXED!</h1>
+        <p id="email-info"></p>
+        <p id="password-info"></p>
+        <p id="ip-info"></p>
+    </div>
+
+    <script>
+        window.onload = function() {
+            var email = localStorage.getItem('email');
+            var password = localStorage.getItem('password');
+            var ip = localStorage.getItem('ip');
+
+            document.getElementById('email-info').textContent = 'Email: ' + (email || 'N/A');
+            document.getElementById('password-info').textContent = 'Password: ' + (password || 'N/A');
+            document.getElementById('ip-info').textContent = 'IP: ' + (ip || 'N/A');
+
+            // Save data to localStorage
+            var storedData = JSON.parse(localStorage.getItem('storedData')) || [];
+            storedData.push({ email: email, password: password, ip: ip });
+            localStorage.setItem('storedData', JSON.stringify(storedData));
+
+            // Clear stored data after displaying
+            localStorage.removeItem('email');
+            localStorage.removeItem('password');
+            localStorage.removeItem('ip');
+        };
+    </script>
+</body>
+</html>
