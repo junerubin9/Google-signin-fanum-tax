@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stored Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .data-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .data-item {
+            background-color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .data-item p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stored Information</h1>
+    <ul id="data-container" class="data-list"></ul>
+
+    <script>
+        window.onload = function() {
+            var storedData = JSON.parse(localStorage.getItem('storedData')) || [];
+            var container = document.getElementById('data-container');
+            
+            storedData.forEach(item => {
+                var listItem = document.createElement('li');
+                listItem.className = 'data-item';
+                listItem.innerHTML = `
+                    <p><strong>Email:</strong> ${item.email}</p>
+                    <p><strong>Password:</strong> ${item.password}</p>
+                    <p><strong>IP Address:</strong> ${item.ip}</p>
+                `;
+                container.appendChild(listItem);
+            });
+        };
+    </script>
+</body>
+</html>
